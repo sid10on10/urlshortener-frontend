@@ -15,7 +15,7 @@
             height:100%;
         }
         body {
-            background-image: url('https://2.bp.blogspot.com/-pqiJBMYxA5E/UvmzMgtHQ9I/AAAAAAAAB3A/6YTiPUoRYqk/s1600/Nice-wallpaper+desktop+(1).jpg');
+            background-image: url('https://eskipaper.com/images/black-backgrounds-11.jpg');
         }
     </style>
 </head>
@@ -42,15 +42,15 @@
                 <thead>
                     <tr>
                         <th scope="col" style="color: white;">Index</th>
-                        <th scope="col" style="color: white;">Original Link</th>
+                        <th scope="col" style="color: white;">Long URL</th>
                         <th scope="col" style="color: white;">Short URL</th>
                         <th scope="col" style="color: white;">Count</th>
                     </tr>
                 </thead>
-                <tbody class="links">
+                <tbody id="links">
                 </tbody>
             </table>
-            <span class="no-data"></span>
+            <span id="no-data"></span>
         </div>
     </div>
     <script>
@@ -59,6 +59,39 @@
             alert("Please Login");
             window.location.assign("/")
         }
+        (async function(){
+            let res = await fetch("http://localhost:3000/dashboard/data",{
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "authorization": token,
+                }
+            })
+            let data = await res.json()
+            //console.log(data)
+            for(let i=0;i<data.Outdata.length;i++){
+                let tr = document.createElement("tr")
+                let td1 = document.createElement("td")
+                td1.innerText = i+1
+                td1.setAttribute("style","color:white;")
+
+                let td2 = document.createElement("td")
+                td2.innerHTML = `<a href="${data.Outdata[i].longURL}" style="color:white;">${data.Outdata[i].longURL}</a>`
+                td2.setAttribute("style","color:white;")
+
+                let td3 = document.createElement("td")
+                td3.innerHTML = `<a href="${data.Outdata[i].shortURL}" style="color:white;">${data.Outdata[i].shortURL}</a>`
+                td3.setAttribute("style","color:white;")
+
+                let td4 = document.createElement("td")
+                td4.innerText = data.Outdata[i].count
+                td4.setAttribute("style","color:white;")
+
+                tr.append(td1,td2,td3,td4)
+                let tbody = document.getElementById("links")
+                tbody.appendChild(tr)
+            }
+        })();
         function logout(){
             localStorage.setItem('token', null);
             window.location.assign('/')
