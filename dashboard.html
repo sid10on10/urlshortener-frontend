@@ -21,13 +21,13 @@
 </head>
 <body>
     <nav class="nav nav-pills flex-column flex-sm-row ml-5 mt-2">
-        <a class="flex-sm-fill text-sm-center nav-link" href="./home.html" style="color: white;">Home</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="./index.html" style="color: white;">Home</a>
         <a class="flex-sm-fill text-sm-center nav-link  active" href="./dashboard.html" style="color: white;">Dashboard</a>
         <a class="flex-sm-fill text-sm-center nav-link logout" onclick="logout();" href="#" style="color: white;">Logout</a>
     </nav>
     <div class="outerbox">
         <div class="container innerbox">
-            <form onsubmit="createShort();return false">
+            <form onsubmit="getshort();return false">
                 <div class="form-group">
                   <label for="longurl">Long URL</label>
                   <input type="text" class="form-control" id="longurl" placeholder="Enter Long URL">
@@ -68,7 +68,6 @@
                 }
             })
             let data = await res.json()
-            //console.log(data)
             for(let i=0;i<data.Outdata.length;i++){
                 let tr = document.createElement("tr")
                 let td1 = document.createElement("td")
@@ -92,6 +91,27 @@
                 tbody.appendChild(tr)
             }
         })();
+
+        
+        async function getshort(){
+            let longurl = document.getElementById("longurl").value
+            console.log(longurl)
+            let data = {
+                url:longurl
+            }
+            let res = await fetch("http://localhost:3000/shorturl",{
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "authorization": token,
+                },
+                body:JSON.stringify(data)
+            })
+            let resData = await res.json()
+            alert(resData.shorturl)
+            window.location.assign("dashboard.html")
+        }
+
         function logout(){
             localStorage.setItem('token', null);
             window.location.assign('/')
