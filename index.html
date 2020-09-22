@@ -2,21 +2,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter</title>
+    <title>Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .outerbox{
+            display: flex;
+            justify-content: center;
+            height:50%;
+        }
+        .innerbox{
+            width:80%;
+            height:100%;
+        }
+        body {
+            background-image: url('https://2.bp.blogspot.com/-pqiJBMYxA5E/UvmzMgtHQ9I/AAAAAAAAB3A/6YTiPUoRYqk/s1600/Nice-wallpaper+desktop+(1).jpg');
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <label for="number"></label>
-        <input type="text" id="number">
-        <button type="submit" onclick="counter()">Press</button>
+    <div class="outerbox">
+        <div class="container innerbox">
+            <h1 style="font-family: monospace;text-align: center;color:white;">Home Page</h1>
+            <h1 style="font-family: monospace;text-align: center;"><a href="/register.html" style="color:white;">Go to Register</a></h1>
+            <h1 style="font-family: monospace;text-align: center;"><a href="/login.html" style="color:white;">Go to Login</a></h1>
+            <h1 style="font-family: monospace;text-align: center;"><a href="/forgot_password.html" style="color:white;">Forgot Password</a></h1>
+
+        </div>
     </div>
-    <script>
-        let count = 0
-        function counter(){
-            document.getElementById("number").value = count
-            count++;
-        }
-    </script>
 </body>
 </html>

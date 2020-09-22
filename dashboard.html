@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .outerbox{
+            display: flex;
+            justify-content: center;
+            height:50%;
+        }
+        .innerbox{
+            width:80%;
+            height:100%;
+        }
+        body {
+            background-image: url('https://2.bp.blogspot.com/-pqiJBMYxA5E/UvmzMgtHQ9I/AAAAAAAAB3A/6YTiPUoRYqk/s1600/Nice-wallpaper+desktop+(1).jpg');
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav nav-pills flex-column flex-sm-row ml-5 mt-2">
+        <a class="flex-sm-fill text-sm-center nav-link" href="./home.html">Home</a>
+        <a class="flex-sm-fill text-sm-center nav-link  active" href="./dashboard.html">Dashboard</a>
+        <a class="flex-sm-fill text-sm-center nav-link logout" onclick="logout();" href="#">Logout</a>
+    </nav>
+    <div class="outerbox">
+        <div class="container innerbox">
+            <form onsubmit="createShort();return false">
+                <div class="form-group">
+                  <label for="longurl">Long URL</label>
+                  <input type="text" class="form-control" id="longurl" placeholder="Enter Long URL">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Short</button>
+            </form>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <table class="table text-sm-center">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Original Link</th>
+                        <th scope="col">Short URL</th>
+                        <th scope="col">Count</th>
+                    </tr>
+                </thead>
+                <tbody class="links">
+                </tbody>
+            </table>
+            <span class="no-data"></span>
+        </div>
+    </div>
+    <script>
+        let token = localStorage.getItem("token")
+        if(token=="null" || token==undefined){
+            alert("Please Login");
+            window.location.assign("/")
+        }
+        function logout(){
+            localStorage.setItem('token', null);
+            window.location.assign('/')
+        }
+    </script>
+</body>
+</html>
